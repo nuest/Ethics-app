@@ -246,6 +246,7 @@ serverSettings: {
 ##### 2.5 Host-server configuration
 
 ###### 2.5.1 Automatic startup
+
 * If you have installed the Ethics-app on a Linux server, you can create a cronjob to automatically start the server after a reboot. Open `sudo nano /etc/crontab` and add the following lines:
 
 ```
@@ -256,6 +257,7 @@ serverSettings: {
 * Add an optional `>> log.txt` to automatically log the output of the console to a text-file.
 
 ###### 2.5.2 Port forwarding
+
 * Add the following lines to your `/etc/crontab`, if you want to create an internal redirect from externally accessible port 80, to internal port 5000, as well as port 443 to internal port 5443:
 
 ```
