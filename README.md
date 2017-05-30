@@ -357,6 +357,20 @@ HTTP_PORT=4000 node server.js
 set HTTP_PORT=4000 node server.js
 ```
 
+## Docker
+
+You can also run the app in Docker containers with the following docker-compose configuration:
+
+```bash
+cd docker
+docker-compose up
+```
+
+The docker-compose configuration comprises three containers:
+
+- `web` is an nginx HTTP proxy running on port 80. This is better than running Node.js on port 80 because you can use this as a template to easily at your own HTTPS certificate.
+- `app` contains the Ethics-app
+- `db` contains the Postgres database
 
 ## License
 
