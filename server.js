@@ -20,7 +20,7 @@ var pool = new pg.Pool({
     database: process.env.POSTGRES_DB_NAME,
     user: process.env.POSTGRES_USERNAME,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: JSON.parse(process.env.POSTGRES_SSL)
+    ssl: JSON.parse(process.env.POSTGRES_SSL || false)
 });
 exports.pool = pool;
 
@@ -51,7 +51,7 @@ pool.on('error', function (err, client) {
 exports.transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
-    secure: JSON.parse(process.env.SMTP_SSL),
+    secure: JSON.parse(process.env.SMTP_SSL ||  true),
     auth: {
         user: process.env.SMTP_EMAIL_ADDRESS,
         pass: process.env.SMTP_PASSWORD
@@ -140,13 +140,13 @@ app.get('/member-client/*', function(req, res, next) {
 
 // Start Webserver
 var httpServer = http.createServer(app);
-httpServer.listen(Number(process.env.HTTP_PORT), function() {
+httpServer.listen(Number(process.env.HTTP_PORT || 5000), function() {
     console.log(colors.green(new Date() + " HTTP-Server is listening at port " + process.env.HTTP_PORT));
 });
 if(process.env.NODE_ENV === "production") {
     var httpsServer = https.createServer(credentials, app);
 
-    httpsServer.listen(Number(process.env.HTTPS_PORT), function() {
+    httpsServer.listen(Number(process.env.HTTPS_PORT || 5443), function() {
         console.log(colors.green(new Date() + " HTTPS-Server is listening at port " + process.env.HTTPS_PORT));
     });
 }
